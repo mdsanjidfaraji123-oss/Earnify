@@ -15,35 +15,32 @@ const FacebookIcon: React.FC = () => (
 
 const SocialLogins: React.FC = () => {
     return (
-        <div className="mt-6">
-            <div className="flex items-center">
-                <div className="flex-grow border-t border-slate-200 dark:border-slate-700" />
-                <span className="flex-shrink mx-4 text-xs font-semibold tracking-wider uppercase text-slate-400 dark:text-slate-500">
-                    Or continue with
-                </span>
-                <div className="flex-grow border-t border-slate-200 dark:border-slate-700" />
+        <div className="mt-8">
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                    <div className="w-full border-t border-slate-300 dark:border-slate-600" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                    <span className="bg-white/80 dark:bg-slate-800/80 px-3 text-slate-500 dark:text-slate-400">Or continue with</span>
+                </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                <div>
-                    <button
-                        type="button"
-                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                    >
-                        <GoogleIcon />
-                        <span className="ml-2">Google</span>
-                    </button>
-                </div>
+            <div className="mt-6 space-y-3">
+                <button
+                    type="button"
+                    className="w-full inline-flex justify-center items-center gap-3 py-2.5 px-4 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm bg-white text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                >
+                    <GoogleIcon />
+                    <span>Continue with Google</span>
+                </button>
 
-                <div>
-                    <button
-                        type="button"
-                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-                    >
-                        <FacebookIcon />
-                        <span className="ml-2">Facebook</span>
-                    </button>
-                </div>
+                <button
+                    type="button"
+                    className="w-full inline-flex justify-center items-center gap-3 py-2.5 px-4 border border-transparent rounded-lg shadow-sm bg-[#1877F2] text-sm font-medium text-white hover:bg-[#166bda] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1877F2] transition-colors"
+                >
+                    <FacebookIcon />
+                    <span>Continue with Facebook</span>
+                </button>
             </div>
         </div>
     );

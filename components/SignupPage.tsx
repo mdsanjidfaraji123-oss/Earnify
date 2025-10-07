@@ -15,6 +15,13 @@ const EyeOffIcon: React.FC<{ className?: string }> = ({ className }) => (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a10.05 10.05 0 013.132-5.125m5.942.543A3 3 0 109.875 9.875m7.5 2.125c.382-.48.724-.99.998-1.525A10.025 10.025 0 0012 5c-.98 0-1.927.18-2.828.515" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M1 1l22 22" /></svg>
 );
 
+const SpinnerIcon: React.FC = () => (
+    <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+    </svg>
+);
+
 
 const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
     const [password, setPassword] = useState('');
@@ -24,6 +31,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
     const [showReferral, setShowReferral] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         let score = 0;
@@ -44,8 +52,11 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        localStorage.setItem('isLoggedIn', 'true');
-        onNavigate('dashboard');
+        setIsLoading(true);
+        setTimeout(() => {
+            localStorage.setItem('isLoggedIn', 'true');
+            onNavigate('dashboard');
+        }, 1500);
     };
 
     const strengthColors = ['bg-slate-300', 'bg-red-500', 'bg-yellow-500', 'bg-blue-500', 'bg-green-500'];
@@ -53,36 +64,36 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
 
     return (
         <AuthLayout onNavigate={onNavigate}>
-            <div className="w-full max-w-sm mx-auto">
-                <h3 className="text-2xl font-bold text-slate-800 text-center">Create Your Account</h3>
-                <p className="text-center text-slate-500 mt-2 mb-8">Let's get you started!</p>
+            <div className="w-full">
+                <h3 className="text-2xl font-bold text-slate-800 dark:text-slate-100 text-center">Create Your Account</h3>
+                <p className="text-center text-slate-500 dark:text-slate-400 mt-2 mb-8">Let's get you started!</p>
                 
                 <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div className="group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
+                    <div className="group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
                         <span className="pl-3.5 pointer-events-none">
-                            <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
+                            <svg className="h-5 w-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
                         </span>
-                        <input type="text" id="fullname" required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Full Name" />
+                        <input type="text" id="fullname" required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Full Name" />
                     </div>
-                     <div className="group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
+                     <div className="group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
                          <span className="pl-3.5 pointer-events-none">
-                                <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
+                                <svg className="h-5 w-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" /><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" /></svg>
                             </span>
-                        <input type="email" id="email-signup" required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Email Address" />
+                        <input type="email" id="email-signup" required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Email Address" />
                     </div>
-                    <div className="group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
+                    <div className="group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
                         <span className="pl-3.5 pointer-events-none">
-                          <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
+                          <svg className="h-5 w-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
                         </span>
-                        <input type="tel" id="phone" className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Phone Number" />
+                        <input type="tel" id="phone" className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Phone Number (Optional)" />
                     </div>
 
-                    <div className="group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
+                    <div className="group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
                          <span className="pl-3.5 pointer-events-none">
-                                <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
+                                <svg className="h-5 w-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
                             </span>
-                        <input type={showPassword ? 'text' : 'password'} id="password-signup" value={password} onChange={(e) => setPassword(e.target.value)} required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Password" />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="pr-3 text-slate-400 hover:text-slate-600 focus:outline-none focus:ring-0" aria-label={showPassword ? "Hide password" : "Show password"}>
+                        <input type={showPassword ? 'text' : 'password'} id="password-signup" value={password} onChange={(e) => setPassword(e.target.value)} required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Password" />
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="pr-3 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none focus:ring-0" aria-label={showPassword ? "Hide password" : "Show password"}>
                                 {showPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
                         </button>
                     </div>
@@ -91,20 +102,20 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
                         <div className="flex items-center space-x-2">
                             <div className="flex-1 flex space-x-1">
                                 {[...Array(4)].map((_, i) => (
-                                    <div key={i} className={`h-2 rounded-full flex-1 transition-colors ${strength > i ? strengthColors[i+1] : 'bg-slate-200'}`}></div>
+                                    <div key={i} className={`h-2 rounded-full flex-1 transition-colors ${strength > i ? strengthColors[i+1] : 'bg-slate-200 dark:bg-slate-600'}`}></div>
                                 ))}
                             </div>
-                            <span className="text-xs font-medium text-slate-500 w-12 text-right">{strength > 0 ? strengthLabels[strength-1] : ''}</span>
+                            <span className="text-xs font-medium text-slate-500 dark:text-slate-400 w-12 text-right">{strength > 0 ? strengthLabels[strength-1] : ''}</span>
                         </div>
                     )}
 
-                    <div className="group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
+                    <div className="group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
                         <span className="pl-3.5 pointer-events-none">
-                           <svg className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
+                           <svg className="h-5 w-5 text-slate-400 dark:text-slate-500 group-focus-within:text-indigo-600 transition" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
                         </span>
-                        <input type={showConfirmPassword ? 'text' : 'password'} id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Confirm Password" />
+                        <input type={showConfirmPassword ? 'text' : 'password'} id="confirm-password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Confirm Password" />
                          <div className="flex items-center pr-2">
-                           <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="p-1 text-slate-400 hover:text-slate-600 focus:outline-none focus:ring-0" aria-label={showConfirmPassword ? "Hide password" : "Show password"}>
+                           <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="p-1 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 focus:outline-none focus:ring-0" aria-label={showConfirmPassword ? "Hide password" : "Show password"}>
                                 {showConfirmPassword ? <EyeOffIcon className="h-5 w-5" /> : <EyeIcon className="h-5 w-5" />}
                            </button>
                            <div className="ml-1">
@@ -115,37 +126,37 @@ const SignupPage: React.FC<SignupPageProps> = ({ onNavigate }) => {
                     </div>
 
                     <div>
-                        <button type="button" onClick={() => setShowReferral(!showReferral)} className="text-sm font-medium text-indigo-600 hover:text-indigo-500 hover:underline">
+                        <button type="button" onClick={() => setShowReferral(!showReferral)} className="text-sm font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 hover:underline">
                            {showReferral ? 'Hide referral code' : 'Have a referral code?'}
                         </button>
                         {showReferral && (
-                            <div className="mt-2 group flex items-center bg-slate-100/50 border border-slate-200 rounded-lg shadow-sm transition-all duration-300 focus-within:bg-white focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-300/50">
-                                <input type="text" id="referral" className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none" placeholder="Referral Code (Optional)" />
+                            <div className="mt-2 group flex items-center bg-white dark:bg-slate-700/50 border-2 border-slate-200 dark:border-slate-700 rounded-lg shadow-sm transition-all duration-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20">
+                                <input type="text" id="referral" className="flex-1 px-3 py-3 w-full bg-transparent focus:outline-none dark:text-slate-200" placeholder="Referral Code (Optional)" />
                             </div>
                         )}
                     </div>
                     
                     <div className="flex items-start pt-2">
                         <div className="flex items-center h-5">
-                            <input id="terms" name="terms" type="checkbox" required className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                            <input id="terms" name="terms" type="checkbox" required className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 dark:border-slate-600 rounded" />
                         </div>
                         <div className="ml-3 text-sm">
-                            <label htmlFor="terms" className="text-slate-600">I agree to the <a href="#" className="font-medium text-indigo-600 hover:underline">Terms</a> and <a href="#" className="font-medium text-indigo-600 hover:underline">Privacy Policy</a></label>
+                            <label htmlFor="terms" className="text-slate-600 dark:text-slate-400">I agree to the <a href="#" className="font-medium text-indigo-600 dark:text-indigo-400 hover:underline">Terms</a> and <a href="#" className="font-medium text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</a></label>
                         </div>
                     </div>
 
                     <div>
-                        <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform active:scale-95">
-                            Create Account
+                        <button type="submit" disabled={isLoading} className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-300 transform active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed">
+                            {isLoading ? <SpinnerIcon /> : 'Create Account'}
                         </button>
                     </div>
                 </form>
 
                 <SocialLogins />
 
-                <p className="mt-6 text-center text-sm text-slate-600">
+                <p className="mt-6 text-center text-sm text-slate-600 dark:text-slate-400">
                     Already have an account?{' '}
-                    <button onClick={() => onNavigate('login')} className="font-medium text-indigo-600 hover:text-indigo-500 hover:underline">
+                    <button onClick={() => onNavigate('login')} className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 hover:underline">
                         Sign in
                     </button>
                 </p>

@@ -16,20 +16,19 @@ const FacebookIcon: React.FC = () => (
 const SocialLogins: React.FC = () => {
     return (
         <div className="mt-6">
-            <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white/0 backdrop-blur-sm text-slate-500">OR CONTINUE WITH</span>
-                </div>
+            <div className="flex items-center">
+                <div className="flex-grow border-t border-slate-200 dark:border-slate-700" />
+                <span className="flex-shrink mx-4 text-xs font-semibold tracking-wider uppercase text-slate-400 dark:text-slate-500">
+                    Or continue with
+                </span>
+                <div className="flex-grow border-t border-slate-200 dark:border-slate-700" />
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 <div>
                     <button
                         type="button"
-                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-300 rounded-lg shadow-sm bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                     >
                         <GoogleIcon />
                         <span className="ml-2">Google</span>
@@ -39,7 +38,7 @@ const SocialLogins: React.FC = () => {
                 <div>
                     <button
                         type="button"
-                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-300 rounded-lg shadow-sm bg-white text-sm font-medium text-slate-600 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+                        className="w-full inline-flex justify-center py-2.5 px-4 border border-slate-200 dark:border-slate-700 rounded-lg shadow-sm bg-white dark:bg-slate-800 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                     >
                         <FacebookIcon />
                         <span className="ml-2">Facebook</span>

@@ -290,7 +290,7 @@ const App: React.FC = () => {
       ) : (
         <>
           <div key={currentPage} className="animate-fade-in">
-            <div className={showAds ? 'pb-20' : ''}>
+            <div className={showAds ? 'pb-28' : ''}>
               {renderPage()}
             </div>
           </div>

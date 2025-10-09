@@ -42,7 +42,7 @@ const DailyBonusCard: React.FC = () => {
     );
 };
 
-const FeaturedProviderCard: React.FC<{provider: typeof featuredProvider}> = ({ provider }) => (
+const FeaturedProviderCard: React.FC<{provider: typeof featuredProvider; onClick: () => void;}> = ({ provider, onClick }) => (
     <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-2xl p-5 text-white shadow-lg shadow-indigo-500/20 flex flex-col space-y-4">
         <div className="flex justify-between items-center">
             <h3 className="text-2xl font-bold">{provider.name}</h3>
@@ -56,7 +56,7 @@ const FeaturedProviderCard: React.FC<{provider: typeof featuredProvider}> = ({ p
                 {provider.tags?.includes('hot') && <span className="text-xs font-semibold bg-red-500 text-white px-2 py-0.5 rounded-full flex items-center"><FireIcon /> Hot</span>}
                 {provider.tags?.includes('highest paying') && <span className="text-xs font-semibold bg-yellow-400 text-yellow-900 px-2 py-0.5 rounded-full">Top Earner</span>}
             </div>
-            <button className="px-5 py-2.5 text-base font-bold text-indigo-600 bg-white rounded-xl shadow-md transition-transform transform hover:scale-105 active:scale-100">
+            <button onClick={onClick} className="px-5 py-2.5 text-base font-bold text-indigo-600 bg-white rounded-xl shadow-md transition-transform transform hover:scale-105 active:scale-100">
                 Watch Now
             </button>
         </div>
@@ -83,6 +83,18 @@ const ProviderCard: React.FC<{ provider: typeof otherProviders[0] }> = ({ provid
 
 
 const WatchVideoPage: React.FC<WatchVideoPageProps> = ({ onNavigate, onBack }) => {
+    
+    const handleWatchNow = () => {
+        const script = document.createElement('script');
+        script.dataset.zone = '10014133';
+        script.src = 'https://groleegni.net/vignette.min.js';
+        script.onerror = () => {
+            console.error("Failed to load the ad script.");
+            script.remove();
+        };
+        document.body.appendChild(script);
+    };
+
     return (
         <div className="bg-gray-50 dark:bg-slate-900 min-h-screen" style={{ fontFamily: "'Poppins', sans-serif" }}>
             <div className="max-w-lg mx-auto p-4 sm:p-6 pb-20">
@@ -105,7 +117,7 @@ const WatchVideoPage: React.FC<WatchVideoPageProps> = ({ onNavigate, onBack }) =
                     </section>
                     
                     <section className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                        <FeaturedProviderCard provider={featuredProvider} />
+                        <FeaturedProviderCard provider={featuredProvider} onClick={handleWatchNow} />
                     </section>
                     
                     <section>
